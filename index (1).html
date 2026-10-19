@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>助人工作者的日常電力與身心頻率自我檢測</title>
+<style>
+:root{
+  --navy:#34495E;--blue:#607D91;--blue-light:#EAF0F4;
+  --gold:#D8BD83;--cream:#F8F5ED;--paper:#FFFDF8;
+  --ink:#293845;--muted:#78858D;--line:#E2E5E7;
+  --red:#C96E62;--yellow:#D9B45F;--battery-green:#789A75;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.8}
+button,input{font:inherit}button{cursor:pointer}
+.cover{min-height:100vh;padding:28px 20px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;color:var(--cream);background:radial-gradient(ellipse at 85% 20%,#607D91 0%,transparent 36%),radial-gradient(ellipse at 10% 90%,#405A6C 0%,transparent 40%),var(--navy)}
+.cover:before,.cover:after{content:"";position:absolute;border:1px solid #D8BD8338;border-radius:50%;pointer-events:none}
+.cover:before{width:460px;height:460px;right:-180px;top:-190px}
+.cover:after{width:320px;height:320px;left:-170px;bottom:-150px}
+.cover-inner{width:100%;max-width:760px;position:relative;z-index:1;padding:40px 12px}
+.eyebrow{color:var(--gold);font-size:12px;letter-spacing:.2em;font-weight:700;margin-bottom:28px}
+.cover-battery{width:104px;height:54px;border:3px solid var(--gold);border-radius:9px;margin:0 auto 34px;padding:5px;position:relative}
+.cover-battery:after{content:"";position:absolute;right:-10px;top:15px;height:18px;width:6px;border-radius:0 4px 4px 0;background:var(--gold)}
+.cover-battery-fill{height:100%;width:78%;border-radius:3px;background:linear-gradient(90deg,#C4D0D8,var(--gold));animation:charge 2.4s ease-in-out infinite alternate}
+@keyframes charge{from{width:30%}to{width:88%}}
+.cover h1{font-size:clamp(28px,5vw,46px);line-height:1.5;letter-spacing:.03em;margin:0 auto 20px}
+.cover-subtitle{font-size:16px;color:#E0E6E9;margin:0 auto 32px}
+.cover-note{font-size:13px;color:#D4DDE1;margin:24px auto 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:12px 28px;font-weight:700;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--gold);color:var(--navy);box-shadow:0 8px 22px #172c3b35}
+.btn-secondary{background:#E8EDF0;color:var(--navy)}
+main{width:min(850px,calc(100% - 28px));margin:30px auto 55px}
+.page-heading{text-align:center;margin:0 auto 28px}
+.page-heading .eyebrow{color:var(--blue);margin-bottom:8px}
+.page-heading h1{font-size:clamp(23px,4vw,32px);line-height:1.5;margin:0 0 8px}
+.page-heading p{color:var(--muted);font-size:14px;margin:0}
+.intro{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:24px}
+.intro h2{font-size:17px;margin:0 0 6px}
+.intro p{margin:0;font-size:14px}
+.progress-wrap{margin:20px 0 28px}
+.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:8px}
+.progress-track{height:6px;background:#E2E5E5;border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:var(--blue);border-radius:99px;transition:width .3s}
+.question-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,32px);margin-bottom:18px;box-shadow:0 8px 28px #263b480d}
+.question-number{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.12em}
+.question-title{font-size:19px;font-weight:700;line-height:1.65;margin:6px 0 18px}
+.question-hint{color:var(--muted);font-size:13px;margin-top:-10px;margin-bottom:16px}
+.options{display:grid;gap:10px}
+.option{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;transition:border .2s,background .2s}
+.option:hover{border-color:#93A7B4;background:#F5F8F9}
+.option:has(input:checked){border-color:var(--blue);background:var(--blue-light)}
+.option input{margin-top:7px;accent-color:var(--blue);flex-shrink:0}
+.option span{flex:1}
+.navigation{display:flex;justify-content:space-between;gap:12px;margin:28px 0}
+.navigation button:disabled{opacity:.35;cursor:not-allowed}
+.result-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,5vw,40px);box-shadow:0 10px 32px #263b4812;text-align:center}
+.result-card h2{font-size:25px;margin:0 0 8px}
+.result-intro{color:var(--muted);margin:0 auto 28px;font-size:14px}
+.dashboard{display:flex;justify-content:center;align-items:center;gap:clamp(22px,5vw,55px);flex-wrap:wrap;margin:28px auto}
+.score-circle{width:174px;height:174px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--blue) var(--angle),#E6E8E6 0deg);position:relative;flex-shrink:0}
+.score-circle:before{content:"";position:absolute;inset:10px;border-radius:50%;background:var(--paper)}
+.score-inner{position:relative;z-index:1}
+.score-number{font-size:44px;line-height:1.2;font-weight:800;color:var(--navy)}
+.score-total,.score-label{color:var(--muted);font-size:13px}
+.battery-panel{width:min(260px,100%);text-align:left}
+.battery-panel h3{font-size:15px;margin:0 0 14px}
+.battery-shell{position:relative;height:38px;border:2px solid #8B9AA3;border-radius:7px;padding:4px;margin-right:10px}
+.battery-shell:after{content:"";position:absolute;width:7px;height:14px;right:-8px;top:10px;background:#8B9AA3;border-radius:0 3px 3px 0}
+.battery-level{width:100%;height:100%;border-radius:3px;background:var(--battery-green);transition:width 1s}
+.battery-percent{font-size:28px;font-weight:800;color:var(--navy);margin-top:10px}
+.result-status{display:inline-block;border-radius:999px;padding:6px 15px;background:var(--blue-light);color:var(--navy);font-weight:700;font-size:14px;margin:8px 0 20px}
+.result-message{text-align:left;border-radius:15px;background:#F0F3F5;padding:20px;margin:16px 0}
+.result-message h3{font-size:17px;margin:0 0 8px}
+.result-message p{margin:0}
+.result-reminder{font-size:13px;color:var(--muted);margin:22px 0}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px 12px 35px}
+@media(max-width:560px){main{margin-top:20px}.question-title{font-size:17px}.navigation .btn{padding:11px 19px}.dashboard{gap:28px}.battery-panel{text-align:center}.battery-shell{max-width:250px;margin:0 auto}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<section class="cover" id="cover">
+  <div class="cover-inner">
+    <div class="eyebrow">SELF-CARE · SELF-AWARENESS</div>
+    <div class="cover-battery" aria-hidden="true"><div class="cover-battery-fill"></div></div>
+    <h1>助人工作者的<br>「日常電力與身心頻率」<br>自我檢測</h1>
+    <p class="cover-subtitle">陪伴他人的同時，也別忘了看看自己的電力。</p>
+    <button class="btn btn-primary" id="startBtn">開始檢測　→</button>
+    <p class="cover-note">這是一段給自己的誠實時刻，不是績效考核。</p>
+  </div>
+</section>
+
+<main id="quiz" hidden>
+  <header class="page-heading">
+    <div class="eyebrow">PAUSE · NOTICE · CARE</div>
+    <h1>助人工作者的日常電力與身心頻率</h1>
+    <p>請依據最近一個月內最真實的直覺作答。</p>
+  </header>
+  <section class="intro">
+    <h2>表單說明</h2>
+    <p>各位老師好，這不是一場績效考核，也不是心理測驗評分，而是一段給自己的「誠實時刻」。在陪伴他人、處理各式各樣的校園與工作挑戰時，我們的身心其實默默承受了很多。請依據你最近一個月內最真實的直覺來勾選。不需要給自己壓力，純粹來看看目前的「電力狀態」吧！</p>
+  </section>
+  <div class="progress-wrap">
+    <div class="progress-meta"><span id="progressText">第 1 題，共 11 題</span><span id="progressPercent">9%</span></div>
+    <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+  <form id="quizForm">
+    <div id="questionContainer"></div>
+    <div class="navigation">
+      <button type="button" class="btn btn-secondary" id="prevBtn">← 上一題</button>
+      <button type="button" class="btn btn-primary" id="nextBtn">下一題 →</button>
+    </div>
+  </form>
+</main>
+
+<main id="results" hidden>
+  <header class="page-heading">
+    <div class="eyebrow">YOUR DAILY ENERGY</div>
+    <h1>你的日常電力報告</h1>
+    <p>這不是評分，而是一個停下來照顧自己的機會。</p>
+  </header>
+  <section class="result-card">
+    <h2>此刻的身心電量</h2>
+    <p class="result-intro">根據本次作答，看看最近的自己可能需要什麼。</p>
+    <div class="dashboard">
+      <div>
+        <div class="score-circle" id="scoreCircle" style="--angle:0deg">
+          <div class="score-inner"><div class="score-number" id="scoreNumber">0</div><div class="score-total">滿分 24 分</div></div>
+        </div>
+        <div class="score-label">身心耗能訊號分數</div>
+      </div>
+      <div class="battery-panel">
+        <h3>目前估計剩餘電量</h3>
+        <div class="battery-shell"><div class="battery-level" id="batteryLevel"></div></div>
+        <div class="battery-percent" id="batteryPercent">100%</div>
+        <div class="score-label">作為自我覺察的視覺化提示</div>
+      </div>
+    </div>
+    <div class="result-status" id="resultStatus"></div>
+    <div class="result-message"><h3 id="resultTitle"></h3><p id="resultDescription"></p></div>
+    <div class="result-message"><h3>給自己的小提醒</h3><p id="resultAdvice"></p></div>
+    <p class="result-reminder">本工具為研習活動中的非正式自我覺察練習，並非經過驗證的心理測驗或診斷。若長期感到身心困擾，建議尋求可信任的人或專業資源協助。</p>
+    <button type="button" class="btn btn-primary" id="restartBtn">重新檢測 ↻</button>
+  </section>
+</main>
+<footer>先照顧好自己，才能陪伴更多人。 · Self-care matters.</footer>
+
+<script>
+const questions = [
+{section:"第一部分：大腦與感官的「防護罩」",title:"1. 當你結束了一整天的工作，回到家或坐上車的那一刻，最常出現的狀態是？",options:[
+{text:"腦袋一片空白，一句話都不想說，只想進入絕對靜音。",score:2},
+{text:"還在反芻白天發生的某個危機或棘手對話，停不下來。",score:2},
+{text:"覺得鬆了一大口氣，終於可以開始做自己喜歡的事。",score:0},
+{text:"身體很累，但精神莫名亢奮，還在想明天要處理的代辦事項。",score:1}]},
+{title:"2. 面對同事傳來長長的個案紀錄、主管交代長文、或是社會上的悲劇新聞時，你的第一反應通常是？",options:[
+{text:"頭皮發麻，完全無法逐字看進去，心裡只想著：「直接告訴我重點或結論就好！」",score:2},
+{text:"內心毫無波瀾，滑過去就像沒看到一樣，覺得「反正這類事每天都在發生」。",score:0},
+{text:"會耐心地把資訊看完，並開始評估對自己工作的影響。",score:1},
+{text:"感到很憤怒或無奈，覺得體制或環境怎麼老是這樣。",score:2}]},
+{title:"3. 當工作上遇到需要創新點子或靈活應變的時刻，你最近的感受是？",options:[
+{text:"腦袋像卡住一樣，只想用以前最安全、最省力的方式敷衍過去。",score:2},
+{text:"創意靈感依舊源源不絕，很喜歡挑戰新方法。",score:0},
+{text:"覺得心好累，只想趕快把事情照表操課做完，不想多花力氣。",score:1}]},
+{section:"第二部分：情感的「容器」與人際互動",title:"4. 當身邊的親友或伴侶關心地問：「你今天過得怎麼樣？還好嗎？」你心裡的真實OS或反應是？",options:[
+{text:"內心有一股不耐煩湧上來，覺得「你根本不懂這份工作有多耗人，不要問了」。",score:2},
+{text:"表面上笑笑說「還好啦」，但其實內心已經沒有多餘力氣去解釋或社交。",score:1},
+{text:"會很感謝對方的關心，並像倒垃圾一樣滔滔不絕地把委屈說出來。",score:0},
+{text:"覺得講了也沒用，反正大家都有自己的壓力。",score:1}]},
+{title:"5. 面對求助者（學生、個案或家屬）再次訴說類似的困境或情緒崩潰時，你的心裡經常出現的聲音是？",options:[
+{text:"「怎麼又是這樣……我不是已經說過了嗎？（感到疲憊與無奈）」",score:1},
+{text:"雖然表面上維持專業聆聽，但內心深處已經有點麻木、甚至聽不進去了。",score:2},
+{text:"依然能感受到對方的痛苦，並想陪伴他們一起走過。",score:0},
+{text:"覺得很憤怒，為什麼這個社會或體制要把這些重擔壓在個案和我們身上？",score:2}]},
+{section:"第三部分：深夜的「隱形對話」與罪惡感",title:"6. 夜深人靜躺在床上準備入睡時，大腦通常在忙些什麼？",options:[
+{text:"反芻白天的對話：「我那句話是不是說錯了？」、「我如果當初多做一點就好了……」",score:2},
+{text:"預演明天的各種突發狀況（例如：某個學生明天會不會又情緒失控？）",score:2},
+{text:"秒睡，完全不想工作的事。",score:0},
+{text:"腦中充滿各種無力的嘆氣，覺得自己今天好像沒幫到什麼忙。",score:1}]},
+{title:"7. 當你週末放假、正在追劇或好好休息時，心裡的真實狀態是什麼？",options:[
+{text:"身體在放假，但心裡充滿罪惡感，覺得「我現在應該要去把個案紀錄寫完才對」。",score:2},
+{text:"覺得自己「不配」擁有快樂或放鬆，焦慮感一直如影隨形。",score:2},
+{text:"能夠全然地放鬆、享受當下，充飽電力。",score:0},
+{text:"一邊放鬆一邊焦慮，擔心禮拜一上班又要面對爛攤子。",score:1}]},
+{section:"第四部分：自我價值與體制感受",title:"8. 對於目前的工作環境與角色，你最常浮現的想法是？",options:[
+{text:"「我覺得自己被困在這裡，別無選擇，每天都在消耗生命。」",score:2},
+{text:"「只有我能救這個案子／撐起這個局了，別人都不行。」（有時會覺得自己責任重大到喘不過氣）",score:2},
+{text:"「這份工作雖然辛苦，但我還在尋找它的意義與平衡。」",score:0},
+{text:"「反正大家都是這樣混口飯吃，不要想太多，船到橋頭自然直。」",score:1}]},
+{title:"9. 下班後，你經常透過什麼方式來「重開機」或讓自己好過一點？",options:[
+{text:"瘋狂大吃、暴飲暴食，或者網購一些平時不需要的東西。",score:2},
+{text:"透過追劇、手遊或酒精來徹底麻痺自己、轉移注意力。",score:2},
+{text:"透過運動、戶外散步、聽音樂或與信任的朋友聊聊天來充電。",score:0},
+{text:"累到直接昏睡，什麼都不想做。",score:1}]},
+{section:"第五部分：身體的誠實抗議",title:"10. 最近這陣子，你的身體是否經常出現以下狀況？（可複選）",hint:"每個符合的症狀計 1 分；選擇「身體一切安好」時，不能同時選其他項目。",multi:true,options:[
+{text:"肩頸僵硬、背痛或頭痛",score:1},
+{text:"睡眠品質很差（常常淺眠、多夢或早醒，睡醒還是很累）",score:1},
+{text:"免疫力下降（容易感冒、腸胃不舒服或莫名的過敏）",score:1},
+{text:"覺得心跳比較快、常常莫名感到胸悶或呼吸急促",score:1},
+{text:"身體一切安好，沒有特別的狀況",score:0,exclusive:true}]},
+{section:"第六部分：對自己的溫柔覺察",title:"11. 如果用「手機電量」來形容你目前的工作與生活狀態，你覺得現在大約剩下多少電？",options:[
+{text:"🔴 紅燈區（0% - 20%）： 隨時會自動關機，已經處於嚴重的燃燒殆盡（Burnout）邊緣。",score:2},
+{text:"🟡 黃燈區（21% - 60%）： 勉強撐著運作，但運轉速度變慢，需要常常充電。",score:1},
+{text:"🟢 綠燈區（61% - 100%）： 電力充足，還很有餘裕面對挑戰。",score:0}]}
+];
+
+const cover=document.getElementById("cover"),quiz=document.getElementById("quiz"),results=document.getElementById("results");
+const container=document.getElementById("questionContainer"),prevBtn=document.getElementById("prevBtn"),nextBtn=document.getElementById("nextBtn");
+let current=0,answers=Array(questions.length).fill(null);
+
+function renderQuestion(){
+ const q=questions[current],saved=answers[current],chosen=saved===null?[]:(Array.isArray(saved)?saved:[saved]);
+ let html="";
+ if(q.section) html+=`<div class="question-card"><div class="question-number">${q.section}</div>`;
+ else html+='<div class="question-card">';
+ html+=`<div class="question-title">${q.title}</div>${q.hint?`<div class="question-hint">${q.hint}</div>`:""}<div class="options">`;
+ q.options.forEach((o,i)=>{html+=`<label class="option"><input type="${q.multi?"checkbox":"radio"}" name="q${current}" value="${i}" ${chosen.includes(i)?"checked":""}><span>${o.text}</span></label>`});
+ html+='</div></div>';container.innerHTML=html;
+ container.querySelectorAll("input").forEach(input=>input.addEventListener("change",handleChange));
+ const pct=Math.round((current+1)/questions.length*100);
+ document.getElementById("progressText").textContent=`第 ${current+1} 題，共 ${questions.length} 題`;
+ document.getElementById("progressPercent").textContent=`${pct}%`;
+ document.getElementById("progressBar").style.width=`${pct}%`;
+ prevBtn.disabled=current===0;nextBtn.textContent=current===questions.length-1?"查看結果 →":"下一題 →";
+}
+function handleChange(e){
+ const q=questions[current];
+ if(q.multi){
+  let selected=[...container.querySelectorAll("input:checked")].map(x=>Number(x.value));
+  const idx=Number(e.target.value),opt=q.options[idx];
+  if(opt.exclusive&&e.target.checked) selected=[idx];
+  else if(!opt.exclusive&&e.target.checked) selected=selected.filter(i=>!q.options[i].exclusive);
+  answers[current]=selected;renderQuestion();
+ }else answers[current]=Number(e.target.value);
+}
+function scoreTotal(){
+ return questions.reduce((sum,q,i)=>{
+  const a=answers[i];if(a===null)return sum;
+  if(Array.isArray(a))return sum+a.reduce((s,j)=>s+q.options[j].score,0);
+  return sum+q.options[a].score;
+ },0);
+}
+function showResults(){
+ const missing=answers.findIndex(a=>a===null);
+ if(missing!==-1){current=missing;renderQuestion();alert(`請先完成第 ${missing+1} 題。`);return}
+ const score=scoreTotal(),ratio=score/24,remaining=Math.round((1-ratio)*100);
+ document.getElementById("scoreNumber").textContent=score;
+ document.getElementById("scoreCircle").style.setProperty("--angle",`${ratio*360}deg`);
+ const battery=document.getElementById("batteryLevel");
+ battery.style.width=`${remaining}%`;
+ battery.style.background="var(--battery-green)";
+ document.getElementById("batteryPercent").textContent=`${remaining}%`;
+ let status,title,description,advice;
+ if(score<=7){
+  status="低度耗能訊號";title="目前還有一定的心理餘裕";
+  description="從這次的回答來看，你目前呈現的耗能訊號相對較少。這不代表你完全不累，而是你可能仍有一些資源可以支持自己。";
+  advice="繼續保留工作以外的生活與休息時間，也別等到真的撐不住，才允許自己停下來。";
+ }else if(score<=15){
+  status="中度耗能訊號";title="你的電量可能正在慢慢下降";
+  description="你可能已經累積了一些疲勞、壓力或情緒負荷。現在是值得停下來調整的時候，不必等到身心發出更強烈的警訊。";
+  advice="試著找出最近最消耗你的事情，重新安排優先順序，適度求助、分工，並為自己保留固定的休息時間。";
+ }else{
+  status="高度耗能訊號";title="也許你已經努力撐了很久";
+  description="這次的回答呈現較多耗能訊號。你不需要把所有事情都獨自扛起，也不必用持續付出來證明自己的價值。";
+  advice="近期請優先照顧自己的身心需求，評估哪些工作可以暫緩或分工，並向信任的同事、主管或專業資源尋求支持。";
+ }
+ document.getElementById("resultStatus").textContent=status;
+ document.getElementById("resultTitle").textContent=title;
+ document.getElementById("resultDescription").textContent=description;
+ document.getElementById("resultAdvice").textContent=advice;
+ quiz.hidden=true;results.hidden=false;window.scrollTo({top:0,behavior:"smooth"});
+}
+document.getElementById("startBtn").addEventListener("click",()=>{cover.hidden=true;quiz.hidden=false;results.hidden=true;current=0;answers=Array(questions.length).fill(null);renderQuestion();window.scrollTo({top:0,behavior:"smooth"})});
+prevBtn.addEventListener("click",()=>{if(current>0){current--;renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}});
+nextBtn.addEventListener("click",()=>{if(answers[current]===null||(Array.isArray(answers[current])&&answers[current].length===0)){alert("請先選擇答案，再繼續作答。");return}if(current<questions.length-1){current++;renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}else showResults()});
+document.getElementById("restartBtn").addEventListener("click",()=>{results.hidden=true;cover.hidden=false;current=0;answers=Array(questions.length).fill(null);window.scrollTo({top:0,behavior:"smooth"})});
+</script>
+</body>
+</html>
